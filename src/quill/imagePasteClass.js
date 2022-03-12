@@ -1,4 +1,6 @@
-export class ImagePaste {
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-const */
+export default class ImagePaste {
   constructor(quill, config = {}) {
     this.quill = quill;
     this.config = config;
@@ -7,9 +9,10 @@ export class ImagePaste {
 
   handlePaste = (e) => {
     const clipboardData = e.clipboardData;
-    let items,
-      item,
-      types;
+    let items;
+    let item;
+    let types;
+
     if (!clipboardData) return;
     items = clipboardData.items;
     if (!items) return;
