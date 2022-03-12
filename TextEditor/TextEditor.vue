@@ -1,67 +1,84 @@
 <template>
-    <section>
-        <quill-editor 
-		v-if="show" 
-		v-model="texto"  
-		@input="onTextChange"
-		:options="editorOption"></quill-editor>
-    </section>
+  <section>
+    <quill-editor
+      v-if="show"
+      v-model="texto"
+      @input="onTextChange"
+      :options="editorOption"
+    ></quill-editor>
+  </section>
 </template>
 <script>
-import 'quill/dist/quill.core.css' // import styles
-import 'quill/dist/quill.snow.css' // for snow theme
-import 'quill/dist/quill.bubble.css' // for bubble theme
+import 'quill/dist/quill.core.css'; // import styles
+import 'quill/dist/quill.snow.css'; // for snow theme
+import 'quill/dist/quill.bubble.css'; // for bubble theme
 
 export default {
-    props:['toolbarText','toolbarVideo','toolbarImage','toolbarLink','imagePaste','imageDrop','placeholder','value'],
-    data(){
-        return{
-			show:false,
-            texto:  this.value,
-            editorOption: {
-                placeholder: this.placeholder != undefined ? this.placeholder : "Inserte el texto aquí..",
-                modules: {
-                    imageDrop: this.imageDrop != undefined ? this.imagePaste: true,
-                    imagePaste: this.imagePaste != undefined ? this.imagePaste: true,
-                    toolbar: [
-                        !this.toolbarText ? [] :["bold", "italic", "underline", "strike"],
-                        !this.toolbarText ? [] :["blockquote", "code-block"],
-                        !this.toolbarText ? [] :[{ header: 1 }, { header: 2 }],
-                        !this.toolbarText ? [] :[{ list: "ordered" }, { list: "bullet" }],
-                        !this.toolbarText ? [] :[{ script: "sub" }, { script: "super" }],
-                        !this.toolbarText ? [] :[{ indent: "-1" }, { indent: "+1" }],
-                        !this.toolbarText ? [] :[{ direction: "rtl" }],
-                        !this.toolbarText ? [] :[{ size: ["small", false, "large", "huge"] }],
-                        !this.toolbarText ? [] :[{ header: [1, 2, 3, 4, 5, 6, false] }],
-                        !this.toolbarText ? [] :[{ font: [] }],
-                        !this.toolbarText ? [] :[{ color: [] }, { background: [] }],
-                        !this.toolbarText ? [] :[{ align: [] }],
-                        !this.toolbarText ? [] :["clean"],
-                        [this.toolbarLink ? "link" : '',this.toolbarImage ? "image" : '', this.toolbarVideo? "video": ''],
-                       
-                    ],
-                    imageResize: {
-                        displayStyles: {
-                            backgroundColor: "black",
-                            border: "none",
-                            color: "white"
-                        },
-                        modules: [ "Toolbar","Resize","DisplaySize"] // ,
-                    }
-                }
-            }
-        };
-	},
-	mounted(){
-		this.show=true;
-	},
-	methods:{
-		onTextChange(event){
-			
-			this.$emit('input', this.texto)
-		}
-	}
-}
+  props: [
+    'toolbarText',
+    'toolbarVideo',
+    'toolbarImage',
+    'toolbarLink',
+    'imagePaste',
+    'imageDrop',
+    'placeholder',
+    'value',
+  ],
+  data() {
+    return {
+      show: false,
+      texto: this.value,
+      editorOption: {
+        placeholder:
+          this.placeholder != undefined
+            ? this.placeholder
+            : 'Inserte el texto aquí..',
+        modules: {
+          imageDrop: this.imageDrop != undefined ? this.imagePaste : true,
+          imagePaste: this.imagePaste != undefined ? this.imagePaste : true,
+          toolbar: [
+            !this.toolbarText ? [] : ['bold', 'italic', 'underline', 'strike'],
+            !this.toolbarText ? [] : ['blockquote', 'code-block'],
+            !this.toolbarText ? [] : [{ header: 1 }, { header: 2 }],
+            !this.toolbarText ? [] : [{ list: 'ordered' }, { list: 'bullet' }],
+            !this.toolbarText ? [] : [{ script: 'sub' }, { script: 'super' }],
+            !this.toolbarText ? [] : [{ indent: '-1' }, { indent: '+1' }],
+            !this.toolbarText ? [] : [{ direction: 'rtl' }],
+            !this.toolbarText
+              ? []
+              : [{ size: ['small', false, 'large', 'huge'] }],
+            !this.toolbarText ? [] : [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            !this.toolbarText ? [] : [{ font: [] }],
+            !this.toolbarText ? [] : [{ color: [] }, { background: [] }],
+            !this.toolbarText ? [] : [{ align: [] }],
+            !this.toolbarText ? [] : ['clean'],
+            [
+              this.toolbarLink ? 'link' : '',
+              this.toolbarImage ? 'image' : '',
+              this.toolbarVideo ? 'video' : '',
+            ],
+          ],
+          imageResize: {
+            displayStyles: {
+              backgroundColor: 'black',
+              border: 'none',
+              color: 'white',
+            },
+            modules: ['Toolbar', 'Resize', 'DisplaySize'], // ,
+          },
+        },
+      },
+    };
+  },
+  mounted() {
+    this.show = true;
+  },
+  methods: {
+    onTextChange(event) {
+      this.$emit('input', this.texto);
+    },
+  },
+};
 </script>
 <style scoped>
 .ql-stroke {
